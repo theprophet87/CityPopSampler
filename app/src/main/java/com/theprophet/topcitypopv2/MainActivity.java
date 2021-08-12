@@ -22,13 +22,13 @@ import com.google.android.youtube.player.YouTubePlayerView;
 
 public class MainActivity extends YouTubeBaseActivity {
 
-    private String API_KEY = "AIzaSyAmF3YBpa-3ECYAhK5QJs6ze27u1fwgagk";
-    private int pos;
+    private String API_KEY = "AIzaSyAmF3YBpa-3ECYAhK5QJs6ze27u1fwgagk"; //youtube API key
+    private int pos; //this variable will hold the position of the song cards in the RecyclerView
 
-    //Creates a youtube player to play video when new video selected
-    private YouTubePlayerView youTubePlayerView;
+
+    private YouTubePlayerView youTubePlayerView; //this creates the youtube player screen
     private YouTubePlayer.OnInitializedListener onInitializedListener;
-    private YouTubePlayer mYoutubePlayer;
+    private YouTubePlayer mYoutubePlayer; //this is needed to be able to change the videos
 
     //enter song information here
     Songs[] songs = {
@@ -39,12 +39,12 @@ public class MainActivity extends YouTubeBaseActivity {
             new Songs("Slow Nights", "Tomoko Aran", R.drawable.slow_nights, 4)
     };
 
+    //video IDs
     String[] urls = {"isfBNsyIgGg",
             "4ESWmrPmJA8",
             "kN5sV4TezN0",
             "IhCDK_pSjnk",
             "N7ZYBawyJQ8"
-
     };
 
     @Override
@@ -55,12 +55,6 @@ public class MainActivity extends YouTubeBaseActivity {
         buildRecyclerView();
         youTubePlayerSetup();
 
-
-
-
-
-
-
     }
 
     private void youTubePlayerSetup() {
@@ -70,7 +64,7 @@ public class MainActivity extends YouTubeBaseActivity {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 Log.d("Tag", "onClick: Done initializing.");
-                if(!b) {
+                if (!b) {
                     mYoutubePlayer = youTubePlayer;
                     youTubePlayer.loadVideo(urls[pos]);
                 }
@@ -84,43 +78,33 @@ public class MainActivity extends YouTubeBaseActivity {
             }
 
 
-
         };
         youTubePlayerView.initialize(API_KEY, onInitializedListener);
     }
 
-    private void buildRecyclerView () {
+    private void buildRecyclerView() {
 
-                //set view for recycler view
-                RecyclerView list = findViewById(R.id.recycler_view_projects);
+        //set view for recycler view
+        RecyclerView list = findViewById(R.id.recycler_view_projects);
 
 
+        //create adapter to add songs array
+        SongsAdapter adapter = new SongsAdapter(songs, urls, new SongsAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                pos = position; //takes in the position of the item in the RecyclerView
+                Log.d("Tag", "clicked on video " + position + 1);
 
-                //create adapter to add songs array
-                SongsAdapter adapter = new SongsAdapter(songs, urls, new SongsAdapter.onItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
-                        pos = position;
-                        Log.d("Tag", "clicked on video " + position+1);
-
-                        mYoutubePlayer.loadVideo(urls[pos]);
-                        Log.d("Tag", "onClick: Done initializing.");
-
-                        showToast("You've clicked on video " + pos);
-                    }
-                });
-
-                //set the adapter
-                list.setAdapter(adapter);
-
-                //we need to create a click listener for the adapter/Recyclerview
-
+                mYoutubePlayer.loadVideo(urls[pos]); //plays the video associated with item clicked
+                Log.d("Tag", "onClick: Done initializing.");
 
             }
+        });
 
+        //set the adapter
+        list.setAdapter(adapter);
 
-
-    private void showToast(String message){
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
+
 }

@@ -88,7 +88,8 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongsViewHol
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View v) { //this method will get the position of the item in the recyclerview
+                                    // it will let the program know which item we selected so it can be used to change videos
             onItemClickListener.onItemClick(getBindingAdapterPosition());
         }
     }
