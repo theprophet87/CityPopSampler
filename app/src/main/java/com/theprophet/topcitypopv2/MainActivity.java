@@ -22,7 +22,7 @@ import com.google.android.youtube.player.YouTubePlayerView;
 
 public class MainActivity extends YouTubeBaseActivity {
 
-    private String API_KEY = "AIzaSyAmF3YBpa-3ECYAhK5QJs6ze27u1fwgagk"; //youtube API key
+    private String API_KEY = ""; //youtube API key
     private int pos; //this variable will hold the position of the song cards in the RecyclerView
 
 
