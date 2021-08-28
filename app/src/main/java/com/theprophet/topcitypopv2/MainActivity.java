@@ -1,110 +1,91 @@
 package com.theprophet.topcitypopv2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.youtube.player.YouTubeBaseActivity;
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerFragment;
-import com.google.android.youtube.player.YouTubePlayerSupportFragment;
-import com.google.android.youtube.player.YouTubePlayerView;
-
-public class MainActivity extends YouTubeBaseActivity {
-
-    private String API_KEY = ""; //youtube API key
-    private int pos; //this variable will hold the position of the song cards in the RecyclerView
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.navigation.NavigationView;
 
 
-    private YouTubePlayerView youTubePlayerView; //this creates the youtube player screen
-    private YouTubePlayer.OnInitializedListener onInitializedListener;
-    private YouTubePlayer mYoutubePlayer; //this is needed to be able to change the videos
+public class MainActivity extends AppCompatActivity {
 
-    //enter song information here
-    Songs[] songs = {
-            new Songs("Love Trip", "Takako Mamiya", R.drawable.love_trip, 0),
-            new Songs("First Light", "Makoto Matsushita", R.drawable.first_light, 1),
-            new Songs("Living In the City", "Judy Anton", R.drawable.living_in_the_city, 2),
-            new Songs("Tasogare", "Mai Yamane", R.drawable.tasogare, 3),
-            new Songs("Slow Nights", "Tomoko Aran", R.drawable.slow_nights, 4)
-    };
 
-    //video IDs
-    String[] urls = {"isfBNsyIgGg",
-            "4ESWmrPmJA8",
-            "kN5sV4TezN0",
-            "IhCDK_pSjnk",
-            "N7ZYBawyJQ8"
-    };
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buildRecyclerView();
-        youTubePlayerSetup();
-
-    }
-
-    private void youTubePlayerSetup() {
-        youTubePlayerView = findViewById(R.id.youtube_view);
-
-        onInitializedListener = new YouTubePlayer.OnInitializedListener() {
+        MaterialToolbar toolbar = findViewById(R.id.topAppbar);
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                Log.d("Tag", "onClick: Done initializing.");
-                if (!b) {
-                    mYoutubePlayer = youTubePlayer;
-                    youTubePlayer.loadVideo(urls[pos]);
-                }
-
-            }
-
-            @Override
-            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-
-                Log.d("Tag", "onClick: Failed to initialize");
-            }
-
-
-        };
-        youTubePlayerView.initialize(API_KEY, onInitializedListener);
-    }
-
-    private void buildRecyclerView() {
-
-        //set view for recycler view
-        RecyclerView list = findViewById(R.id.recycler_view_projects);
-
-
-        //create adapter to add songs array
-        SongsAdapter adapter = new SongsAdapter(songs, urls, new SongsAdapter.onItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                pos = position; //takes in the position of the item in the RecyclerView
-                Log.d("Tag", "clicked on video " + position + 1);
-
-                mYoutubePlayer.loadVideo(urls[pos]); //plays the video associated with item clicked
-                Log.d("Tag", "onClick: Done initializing.");
-
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
             }
         });
 
-        //set the adapter
-        list.setAdapter(adapter);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                item.setChecked(true);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                switch(id)
+                {
+                    case R.id.nav_home:
+                        //switch fragment
+                        replaceFragment(new HomeFragment());
+                        //change header
+                        toolbar.setTitle(R.string.current_playlist_text);
+                        break;
+                    case R.id.nav_last_week:
+                        //switch fragment
+                        replaceFragment(new LastWeekFragment());
+                        //change header
+                        toolbar.setTitle(R.string.last_week_playlist_text);
+                        break;
+                    case R.id.nav_contact:
+                        //switch fragment
+                        replaceFragment(new ContactFragment());
+                        //change header
+                        break;
+                    case R.id.nav_rate:
+                        //switch fragment
+                        Toast.makeText(getApplicationContext(), "Give us 5 stars!", Toast.LENGTH_SHORT).show();
+                        //change header
+                    default:
+                        return true;
+
+                }
+                return true;
+            }
+        });
 
     }
-
+    private void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout,fragment);
+        fragmentTransaction.commit();
+    }
 
 }

@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <solid android:color="@color/hot_pink"/>
-    <corners android:topLeftRadius="400dp"
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="@color/white"/>
+
+        </shape>
+    </item>
+
+    <item>
+    <shape >
+
+
+        <solid android:color="@color/hot_pink"/>
+        <corners android:topLeftRadius="400dp"
         android:topRightRadius="0dp"/>
 
-</shape>
+    </shape>
+</item>
+
+</layer-list>

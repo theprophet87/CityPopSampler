@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_gravity="center"
-    android:padding="20dp"
-    tools:context=".MainActivity"
-    android:background="@drawable/front_page_background">
 
-    <com.google.android.youtube.player.YouTubePlayerView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/youtube_view"/>
+    android:id="@+id/drawer_layout"
+    tools:context=".MainActivity">
 
 
-
-
-
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/frame_layout"
-        android:layout_below="@id/youtube_view"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp">
+        android:layout_height="match_parent">
 
-        <ScrollView
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/appbarLayout">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_projects"
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_list" />
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/hot_pink"
+                app:titleTextColor="@color/white"
+
+                app:navigationIcon="@drawable/ic_baseline_menu_24"
+                app:title="@string/current_playlist_text" />
 
 
-        </ScrollView>
+        </com.google.android.material.appbar.AppBarLayout>
 
-    </FrameLayout>
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/frame_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.theprophet.topcitypopv2.HomeFragment"
+            android:layout_below="@id/appbarLayout" />
 
 
-    <TextView
+
+    </RelativeLayout>
+
+
+
+
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_gravity="start"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="© 2021 Prophet Dev Solutions, Inc"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:textColor="@color/white"
-        android:layout_alignParentBottom="true"/>
+        android:layout_height="match_parent"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/my_navigation_items" />
 
-</RelativeLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
 
 
 
