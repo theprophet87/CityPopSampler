@@ -1,10 +1,12 @@
 <resources>
-    <string name="app_name">Top City Pop</string>
+    <string name="app_name">City Pop Sampler</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="current_playlist_text">Current Playlist</string>
-    <string name="last_week_playlist_text">Previous Playlist</string>
+    <string name="current_playlist_text">Current Playlist (September)</string>
+    <string name="previous_playlist_text">Previous Playlist (August)</string>
+    <string name="contact_us_text">Contact Us</string>
     <string name="nav_header_title">City Pop Sampler</string>
-    <string name="company_name">Prophetic Dev Solutions</string>
+    <string name="company_name">Prophetic Solutions</string>
+    <string name="app_title">City Pop Sampler</string>
 
 </resources>
