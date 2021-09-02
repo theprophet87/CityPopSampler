@@ -2,11 +2,14 @@
     <string name="app_name">City Pop Sampler</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="current_playlist_text">Current Playlist (September)</string>
-    <string name="previous_playlist_text">Previous Playlist (August)</string>
+    <string name="current_playlist_text">Current Playlist</string>
+    <string name="previous_playlist_text">Previous Playlist</string>
     <string name="contact_us_text">Contact Us</string>
+    <string name="about_us_text">About The App</string>
     <string name="nav_header_title">City Pop Sampler</string>
     <string name="company_name">Prophetic Solutions</string>
     <string name="app_title">City Pop Sampler</string>
+    <string name="email">propheticsolutions@gmail.com</string>
+    <string name="about_paragraph">"This app was born out of my love for Japanese City Pop and a desire to share this passion with others. Every month, I will curate a new playlist of 5 songs for you to explore. I will also make the previous month's playlist available in case you missed it. I hope you all enjoy exploring this wonderful style of music and that you will be led to discover more artists on your own. Please don't forget to support the artists by buying their music, as well!"</string>
 
 </resources>
