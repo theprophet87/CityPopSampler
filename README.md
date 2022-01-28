@@ -1,10 +1,17 @@
-# TopCityPopv2
-Top 5 City Pop song player app
+# Top City Pop Sampler App
+This is an app which acts as a sampler of Japanese City Pop music via Youtube videos.
 
-This app was designed as an exercise in using the Youtube API in Android Studio.
+![City Pop Sampler App](https://media.giphy.com/media/GD1CVjjvNc2nSBGkLk/giphy.gif)
 
-I wanted to make an app that would play my top 5 Japanese city pop videos from youtube but play on the app rather than simply linking to youtube via the phone's browser.
-This particular version of the app stems from an earlier version that only linked to the Youtube. That app was also written in Java as I was beginning to learn Android development.
+## How It's Made:
+I used Kotlin in Android Studio to make this app. The original version of this app was built using Java, but I decided to rebuild the whole app using Kotlin as I decided to pivot my focus on that language.
 
-By the time I was ready to work on integrating the Youtube player in the app, I had already learned Kotlin, but figured it would take too much time to convert the project so I decided to reinforce my Java skills by finishing this project in Java.
+
+## Lessons Learned:
+This app taught me how to use fragments and tabs to navigate, as well as implementing the Drawer Layout for a menu. Furthermore, this was my introduction to using a Youtube player and making RecyclerView items clickable. 
+
+
+
+## Things to improve:
+I'd like to make the RecyclerView items movable to re-order the videos.
 
